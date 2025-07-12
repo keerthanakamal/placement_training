@@ -64,4 +64,64 @@ DONE
 Sample Output 0
 
 120'''
+stack=[]
+R=[]
 
+def PUSH(x):
+    stack.insert(0,x)
+def STORE():
+    R.append(stack.pop(0))
+def LOAD():
+    stack.insert(0,R[-1])
+def PLUS():
+    x=stack.pop(0)
+    y=stack.pop(0)
+    s=x+y
+    stack.insert(0,s)
+def TIMES():
+    x=stack.pop(0)
+    y=stack.pop(0)
+    s=x*y
+    stack.insert(0,s)
+def IFZERO(n):
+    if stack.pop(0)==0:
+        return n
+    else:
+        return 0
+def DONE():
+    return stack.pop(0)
+
+n=int(input())
+arr=[]
+
+for i in range(n):
+    a=list(input().split())
+    arr.append(a)
+
+i=0
+while i<n:
+    if arr[i][0]=='PUSH':
+        PUSH(int(arr[i][1]))
+        i+=1
+    elif arr[i][0]=='STORE':
+        STORE()
+        i+=1
+    elif arr[i][0]=='LOAD':
+        LOAD()
+        i+=1
+    elif arr[i][0]=='PLUS':
+        PLUS()
+        i+=1
+    elif arr[i][0]=='TIMES':
+        TIMES()
+        i+=1
+    elif arr[i][0]=='IFZERO':
+        x=IFZERO(int(arr[i][1]))
+        if x==0:
+            i+=1
+        else:
+            i=x
+    elif arr[i][0]=='DONE':
+        m=DONE()
+        print(m)
+        exit()
